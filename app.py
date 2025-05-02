@@ -60,7 +60,7 @@ def upload():
     return send_file(img_io, mimetype='image/png')
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))  # Render가 주는 PORT를 우선 사용
     app.run(host='0.0.0.0', port=port)
+
 
