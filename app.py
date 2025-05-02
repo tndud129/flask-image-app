@@ -3,6 +3,7 @@ from flask_cors import CORS
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance
 from rembg import remove
 import io
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -31,6 +32,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    os.environ["U2NET_HOME"] = "/tmp"
     file = request.files['image']
     input_image = Image.open(file).convert("RGBA")
     user_image = remove(input_image).convert("RGBA")
