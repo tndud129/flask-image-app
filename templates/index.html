@@ -24,25 +24,23 @@
             const formData = new FormData();
             formData.append('image', file);
 
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
+            fetch("/upload", {
+                method: "POST",
+                body: formData,
             })
-                .then(res => {
-                    if (!res.ok) throw new Error("서버 오류");
-                    return res.blob();
+                .then(response => {
+                    if (!response.ok) throw new Error("업로드 실패");
+                    return response.blob();
                 })
                 .then(blob => {
-                    const img = document.getElementById('preview');
-                    img.src = ""; // ✅ 강제 초기화
                     const url = URL.createObjectURL(blob);
+                    const img = document.getElementById("preview");
                     img.src = url;
-                    img.style.display = 'block';
+                    img.style.display = "block";
                 })
-
-                .catch(err => {
-                    alert("업로드 중 오류가 발생했습니다.");
-                    console.error(err);
+                .catch(error => {
+                    alert("이미지 업로드 중 문제가 발생했습니다.");
+                    console.error(error);
                 });
         }
     </script>
