@@ -56,3 +56,7 @@ def upload():
     blended.save(img_io, 'PNG')
     img_io.seek(0)
     return send_file(img_io, mimetype='image/png')
+
+if __name__ != '__main__':
+    app = app
+
