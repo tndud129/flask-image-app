@@ -51,8 +51,8 @@ def upload():
 
     # ✅ 3. 이미지 보정: 채도 0, 밝기 +20%, 대비 +50%
     user_image = ImageEnhance.Color(user_image).enhance(0.0)
-    user_image = ImageEnhance.Brightness(user_image).enhance(1.2)
-    user_image = ImageEnhance.Contrast(user_image).enhance(1.5)
+    user_image = ImageEnhance.Brightness(user_image).enhance(1)
+    user_image = ImageEnhance.Contrast(user_image).enhance(1.2)
 
     # ✅ 4. 그라데이션 배경 생성
     blue_layer = create_vertical_gradient(
@@ -76,5 +76,7 @@ def upload():
     return send_file(img_io, mimetype='image/png')
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5003)
+if __name__ != '__main__':
+    app = app
+
+
