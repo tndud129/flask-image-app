@@ -1,5 +1,5 @@
-Flask
+flask
 gunicorn
 flask-cors
-Pillow
+pillow
 rembg
