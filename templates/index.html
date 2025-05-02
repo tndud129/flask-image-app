@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>시안 업로드</title>
+</head>
+
+<body>
+    <h2>사진을 업로드하면 시안을 보여드려요</h2>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadImage()">업로드</button>
+    <br><br>
+    <img id="preview" style="max-width: 400px; display: none;" />
+
+    <script>
+        function uploadImage() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) {
+                alert("파일을 선택해주세요.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("서버 오류");
+                    return res.blob();
+                })
+                .then(blob => {
+                    const img = document.getElementById('preview');
+                    img.src = ""; // ✅ 강제 초기화
+                    const url = URL.createObjectURL(blob);
+                    img.src = url;
+                    img.style.display = 'block';
+                })
+
+                .catch(err => {
+                    alert("업로드 중 오류가 발생했습니다.");
+                    console.error(err);
+                });
+        }
+    </script>
+</body>
+
+</html>
